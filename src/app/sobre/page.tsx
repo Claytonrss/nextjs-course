@@ -1,3 +1,4 @@
+import Width from "@/components/components/width";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
     return (
       <main>
         <h1>Sobre</h1>
+        <Width/>
       </main>
     );
   }

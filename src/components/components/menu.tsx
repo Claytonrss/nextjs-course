@@ -7,6 +7,7 @@ export default function Menu() {
         <li><Link href="/sobre" prefetch>Sobre</Link></li>
         <li><Link href="/imc" prefetch>IMC</Link></li>
         <li><Link href="/fetch" prefetch>Fetch</Link></li>
+        <li><Link href="/cursos" prefetch>Cursos</Link></li>
       </ul>
     );
   }

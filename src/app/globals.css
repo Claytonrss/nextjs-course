@@ -133,3 +133,9 @@ img {
   list-style: none;
   padding: 0;
 }
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

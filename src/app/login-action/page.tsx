@@ -1,8 +1,8 @@
 "use client";
 import { Form } from "@/components/components/form";
 import { useLogin } from "@/hooks/useLogin";
-import { deleteCookie, getCookie } from "@/server-actions/cookies";
-import { login } from "@/server-actions/login";
+import { deleteCookie, getCookie } from "@/actions/cookies";
+import { login } from "@/actions/login";
 import { LoginParams } from "@/types/Login";
 import { useEffect, useState } from "react";
 

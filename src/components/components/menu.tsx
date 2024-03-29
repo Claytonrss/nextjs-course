@@ -30,6 +30,11 @@ export default function Menu() {
             Cursos
           </Link>
         </li>
+        <li>
+          <Link href="/login-action" prefetch>
+            Action
+          </Link>
+        </li>
       </ul>
       <SignInSignOn/>
     </div>

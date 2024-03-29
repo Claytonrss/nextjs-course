@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       httpOnly: true,
     });
 
-    return Response.json({ status: 200, message: "login bem sucedido" });
+    return Response.json({ status: 200, message: "login bem sucedido", token });
   } catch (error) {
     console.error(error);
     return Response.json({ status: 401, error: "Login mal sucedido" });

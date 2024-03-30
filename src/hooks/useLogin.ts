@@ -21,7 +21,6 @@ export const useLogin = ({ fetchLogin, actionAfterLogin }: UseLoginType) => {
 
     try {
       const data = await fetchLogin({username, password});
-      console.log("🚀 ~ login ~ data:", data)
 
       if (data.token) {
         actionAfterLogin();

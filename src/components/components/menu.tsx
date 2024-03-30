@@ -35,6 +35,16 @@ export default function Menu() {
             Action
           </Link>
         </li>
+        <li>
+          <Link href="/produtos" prefetch>
+            Produtos
+          </Link>
+        </li>
+        <li>
+          <Link href="/produtos/adicionar" prefetch>
+            Add Produto
+          </Link>
+        </li>
       </ul>
       <SignInSignOn/>
     </div>

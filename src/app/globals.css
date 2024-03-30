@@ -132,6 +132,8 @@ img {
   gap: 1.5rem;
   list-style: none;
   padding: 0;
+  flex-wrap: wrap;
+  margin-right: 100px;
 }
 
 .header{

@@ -2,10 +2,10 @@
 
 import { createProduct } from "@/actions/products";
 import React, { useState } from "react";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 
 function ButtonSubmit() {
-  const { pending } = useFormStatus();  
+  const { pending } = useFormStatus();
 
   return (
     <button type="submit" disabled={pending}>
@@ -15,66 +15,29 @@ function ButtonSubmit() {
 }
 
 export function FormAddProduct() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsLoading(true);
-    setError(null);
-    const formData = new FormData(event.currentTarget);
-    const nome = formData.get("nome")?.toString() || "";
-    const preco = formData.get("preco")?.toString();
-    const descricao = formData.get("descricao")?.toString() || "";
-    const estoque = formData.get("estoque")?.toString();
-    const importado = formData.get("importado") === "on" ? 1 : 0;
-
-    if (nome && preco && descricao && estoque) {
-      try {
-        const product = {
-          nome,
-          preco: Number(preco),
-          descricao,
-          estoque: Number(estoque),
-          importado: importado as 1 | 0,
-        };
-        const result = await createProduct(product);
-        console.log("Produto cadastrado com sucesso:", result);
-      } catch (error) {
-        setError("Falha ao cadastrar o produto. Tente novamente.");
-        console.error("Erro ao cadastrar produto:", error);
-      }
-    } else {
-      setError("Por favor, preencha todos os campos obrigatórios.");
-    }
-    setIsLoading(false);
-  };
+  const [state, formAction] = useFormState(createProduct, {
+    errors: [],
+  });
 
   return (
-    <form onSubmit={handleSubmit} aria-busy={isLoading}>
+    <form action={formAction}>
       <label htmlFor="nome">Nome</label>
-      <input id="nome" type="text" name="nome" aria-required="true" />
-
+      <input type="text" id="nome" name="nome" />
       <label htmlFor="preco">Preço</label>
-      <input id="preco" type="number" name="preco" aria-required="true" />
-
+      <input type="number" id="preco" name="preco" />
       <label htmlFor="descricao">Descrição</label>
-      <input id="descricao" type="text" name="descricao" aria-required="true" />
-
+      <input type="text" id="descricao" name="descricao" />
       <label htmlFor="estoque">Estoque</label>
-      <input id="estoque" type="number" name="estoque" aria-required="true" />
-
+      <input type="number" id="estoque" name="estoque" />
       <label htmlFor="importado">
-        <input
-          type="checkbox"
-          id="importado"
-          name="importado"
-          aria-required="true"
-        />
+        <input type="checkbox" id="importado" name="importado" />
         Importado
       </label>
-      {isLoading && <p style={{ color: "green" }}>Carregando...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {state.errors.map((error, i) => (
+        <p style={{ color: "red" }} key={i}>
+          {error}
+        </p>
+      ))}
       <ButtonSubmit />
     </form>
   );
